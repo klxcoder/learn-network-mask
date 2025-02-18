@@ -38,11 +38,15 @@
   <div id="root"></div>
   <script type="text/babel">
     function App() {
+      const getBinaryNotation = (cidrNumber) => {
+        return Array(cidrNumber).fill(1).join('') + Array(32 - cidrNumber).fill(0).join('');
+      }
+
       const rows = [
         {
           cidr: '/24',
           dotDecimal: '255.255.255.0',
-          binary: '11111111.11111111.11111111.00000000',
+          binary: getBinaryNotation(24),
         },
       ]
       return (
