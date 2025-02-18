@@ -39,7 +39,7 @@
   <script type="text/babel">
     function App() {
       const getBinaryNotation = (cidrNumber) => {
-        return Array(cidrNumber).fill(1).join('') + Array(32 - cidrNumber).fill(0).join('');
+        return [...Array(cidrNumber).fill(1), ...Array(32 - cidrNumber).fill(0)].join('').match(/.{8}/g).join('.')
       }
 
       const rows = [
