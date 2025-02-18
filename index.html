@@ -8,15 +8,64 @@
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    caption {
+      caption-side: top;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="text/babel">
     function App() {
+      const rows = [
+        {
+          cidr: '/24',
+          dotDecimal: '255.255.255.0',
+          binary: '11111111.11111111.11111111.00000000',
+        },
+      ]
       return (
         <div>
-          <h1>Hello, React!</h1>
+          <table>
+            <caption>Sample Table</caption>
+            <thead>
+              <tr>
+                <th>CIDR notation</th>
+                <th>Dot-decimal notation</th>
+                <th>Binary notation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.cidr}</td>
+                  <td>{row.dotDecimal}</td>
+                  <td>{row.binary}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       );
     }
