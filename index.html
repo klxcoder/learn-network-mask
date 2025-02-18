@@ -38,21 +38,25 @@
   <div id="root"></div>
   <script type="text/babel">
     function App() {
+
       const getBinaryNotation = (cidrNumber) => {
-        return [...Array(cidrNumber).fill(1), ...Array(32 - cidrNumber).fill(0)].join('').match(/.{8}/g).join('.')
+        return [...Array(cidrNumber).fill(1), ...Array(32 - cidrNumber).fill(0)].join('').match(/.{8}/g).join('.');
       }
 
-      const rows = [
-        {
-          cidr: '/24',
-          dotDecimal: '255.255.255.0',
-          binary: getBinaryNotation(24),
-        },
-      ]
+      const binToDec = (bin) => parseInt(bin, 2).toString(10);
+
+      const getDotDecimalNotation = (binary) => binary.split('.').map(binToDec).join('.');
+
+      const rows = Array(33).fill(true).map((_, index) => ({
+        cidr: `/${index}`,
+        dotDecimal: getDotDecimalNotation(getBinaryNotation(index)),
+        binary: getBinaryNotation(index),
+      }));
+
       return (
         <div>
           <table>
-            <caption>Sample Table</caption>
+            <caption>Network Mask Table</caption>
             <thead>
               <tr>
                 <th>CIDR notation</th>
